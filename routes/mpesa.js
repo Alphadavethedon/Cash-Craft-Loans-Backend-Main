@@ -11,7 +11,10 @@ const MPESA_BASE_URL = process.env.NODE_ENV === 'production'
   ? 'https://api.safaricom.co.ke' 
   : 'https://sandbox.safaricom.co.ke';
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> 9b62138fef25ee7d3bbd83ad976b8dbce93617d6
 // Generate M-Pesa access token
 const generateAccessToken = async () => {
   try {
@@ -277,4 +280,8 @@ router.post('/b2c/result/:loanId', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 9b62138fef25ee7d3bbd83ad976b8dbce93617d6

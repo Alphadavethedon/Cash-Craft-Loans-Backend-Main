@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
 const { router } = require('../node');
 const authHeader = "Basic " + Buffer.from(`${process.env.SAFARICOM_CONSUMER_KEY}:${process.env.SAFARICOM_CONSUMER_SECRET}`).toString("base64");st { validateRequest, registerSchema, loginSchema } = require('../middleware/validation');
 
+=======
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const { auth } = require('../middleware/auth');
+const { validateRequest, registerSchema, loginSchema } = require('../middleware/validation');
+
+const router = express.Router();
+>>>>>>> 9b62138fef25ee7d3bbd83ad976b8dbce93617d6
 
 // Generate JWT token
 const generateToken = (userId) => {
@@ -187,6 +197,10 @@ router.post('/refresh-token', auth, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 module.exports = router;
 // @route   POST /api/auth/logout
 // @desc    Logout user (invalidate token)
+=======
+module.exports = router;
+>>>>>>> 9b62138fef25ee7d3bbd83ad976b8dbce93617d6
