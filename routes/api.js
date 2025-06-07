@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const unirest = require("unirest");
-
+app.use('/api/loans', require('./routes/loanRoutes'));
 // Add this endpoint
 router.get('/get-safaricom-token', async (req, res) => {
   try {

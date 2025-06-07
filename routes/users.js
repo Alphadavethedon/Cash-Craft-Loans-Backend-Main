@@ -4,7 +4,28 @@ const User = require('../models/User');
 const Loan = require('../models/Loan');
 const { auth } = require('../middleware/auth');
 const { validateRequest, kycSchema } = require('../middleware/validation');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+  }
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  res.json({ token });
+});
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  phone: { type: String, required: true }, // For M-Pesa integration
+  nationalId: { type: String }, // For KYC
+});
+
+module.exports = mongoose.model('User', userSchema);
 const router = express.Router();
 
 // Multer configuration for file uploads
@@ -279,5 +300,6 @@ router.delete('/account', auth, async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
